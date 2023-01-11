@@ -13,6 +13,9 @@ class AStar:
         self.start: Node | None = start
         self.end: Node | None = end
 
+        # The number of passes performed
+        self.passes_performed: int = 0
+
         # If the end node has been reached
         self.end_reached: bool = False
 
@@ -30,6 +33,8 @@ Resets the algorithm.
 
         self.start = None
         self.end = None
+
+        self.passes_performed = 0
 
         self.end_reached = False
 
@@ -126,6 +131,7 @@ Performs a pass of the algorithm.
         # Check if it is the end node
         if node == self.end:
             self.end_reached = True
+            self.passes_performed += 1
             return
 
         # Move the node from open to closed
@@ -139,6 +145,7 @@ Performs a pass of the algorithm.
         for connected_node in connected_nodes:
             self._process_node(node, connected_node)
 
+        self.passes_performed += 1
         return
 
     def find_path(self):
