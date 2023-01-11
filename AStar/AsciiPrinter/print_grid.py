@@ -12,19 +12,20 @@ If a node has a parent then there will be an arrow pointing to it, otherwise jus
         for x in range(grid.x_size):
             if grid[x, y].parent is None:
                 print('■', end='')
-            else:
-                child = grid[x, y]
-                parent = child.parent
+                continue
 
-                if parent.x_position > child.x_position:  # To the right
-                    char = '→'
-                elif parent.x_position < child.x_position:  # To the left
-                    char = '←'
-                elif parent.y_position < child.y_position:  # Above
-                    char = '↑'
-                else:  # Below
-                    char = '↓'
+            child = grid[x, y]
+            parent = child.parent
 
-                print(char, end='')
+            if parent.x_position > child.x_position:  # To the right
+                char = '→'
+            elif parent.x_position < child.x_position:  # To the left
+                char = '←'
+            elif parent.y_position < child.y_position:  # Above
+                char = '↑'
+            else:  # Below
+                char = '↓'
+
+            print(char, end='')
 
         print()  # Newline
