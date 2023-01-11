@@ -59,6 +59,20 @@ Also calls reset
 
         self.end = node
 
+    def _process_start_node(self):
+        """
+Called before _process_node should be called.
+Generates the G and H costs for the starting node.
+        """
+
+        x_diff = abs(self.start.x_position - self.end.x_position)
+        y_diff = abs(self.start.y_position - self.end.y_position)
+        h_cost = x_diff + y_diff
+
+        self.start.h_host = h_cost
+        self.start.g_cost = 0
+
+
     def _process_node(self, current_node, processing_node: Node):
         """
 Processes the given node by:
@@ -144,7 +158,10 @@ If there is no nodes inside the open list then an error is raised.
         assert not self.end_reached, "End condition must not start as True"
         assert self.start is not self.end, "Start must not be the end"
 
-        # We can start now
+        # Generate the G and H costs of the starting node
+        self._process_start_node()
+
+        # Run until the end has been reached
         while not self.end_reached:
             self._pass()
 
