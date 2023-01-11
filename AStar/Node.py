@@ -39,5 +39,18 @@ Returns a list of the connected nodes found in self.connections.
 
         return connected_nodes
 
+    @staticmethod
+    def get_all_lowest_f_cost(list_of_nodes: list['Node']) -> list['Node']:
+        # Get the minimum F cost
+        min_f_cost = min([node.f_cost for node in list_of_nodes])
+
+        # Get all node with the same minimum F cost
+        all_min_f_cost_nodes = [
+            node for node in list_of_nodes if node.f_cost == min_f_cost
+        ]
+
+        # Return them
+        return  all_min_f_cost_nodes
+
     def __str__(self):
         return f"Node - G: {self.g_cost}, H: {self.h_host}, F: {self.f_cost}"
