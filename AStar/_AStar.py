@@ -102,10 +102,9 @@ Processes the given node by:
             new_h_cost = x_diff + y_diff
             processing_node.h_cost = new_h_cost
 
-    def _pass(self) -> bool:
+    def _pass(self):
         """
 Performs a pass of the algorithm.
-        :return: True if the end node has been reached
         """
 
         # Get all nodes with the minimum F cost
@@ -120,7 +119,8 @@ Performs a pass of the algorithm.
 
         # Check if it is the end node
         if node == self.end:
-            return True
+            self.end_reached = True
+            return
 
         # Move the node from open to closed
         self.open.remove(node)
@@ -133,4 +133,27 @@ Performs a pass of the algorithm.
         for connected_node in connected_nodes:
             self._process_node(node, connected_node)
 
-        return False
+        return
+
+    def find_path(self):
+        """
+Finds a path from the start node to the end node.
+If there is no nodes inside the open list then an error is raised.
+        :return: Nothing in so far.
+        """
+
+        # Sanity checks
+        assert self.start is not None, "Start node must be set"
+        assert self.end is not None, "End node must be set"
+        assert self.open, "Open list must have the start node, done when initialised or set_start is called"
+        assert len(self.open) == 1, "Open list must only contain the start node"
+        assert self.open[0] is self.start, "Open list must only contain the start node"
+        assert not self.closed, "Closed list must be empty"
+        assert not self.end_reached, "End condition must not start as True"
+        assert self.start is not self.end, "Start must not be the end"
+
+        # We can start now
+        while not self.end_reached:
+            self._pass()
+
+        # If we get here then the end has been reached without an error being raised, create the path.
