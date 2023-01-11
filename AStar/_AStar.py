@@ -1,11 +1,3 @@
-# Algorithm
-# Look for lowest F cost and expand on that node first
-# 	In the case of same F costs for many nodes, chose the lowest H cost
-# 	In the case of same H costs then go randomly
-# When looking at a node, update the costs of the nodes around it
-#	Mark the nodes checked
-# 	Make them smaller if that is the case, else don’t change
-# When you reach the end, follow the path of parents
 from AStar import Node
 
 
@@ -157,3 +149,4 @@ If there is no nodes inside the open list then an error is raised.
             self._pass()
 
         # If we get here then the end has been reached without an error being raised, create the path.
+        # Follow the path of parents from the end node to the start node
