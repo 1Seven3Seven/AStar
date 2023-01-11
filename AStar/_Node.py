@@ -37,6 +37,14 @@ Resets the node's G and H costs, connections and parent.
         self.connections = []
         self.parent = None
 
+    def remove_all_connections(self):
+        """
+Calls remove on all connections.
+        """
+
+        for connection in self.connections:
+            connection.remove()
+
     def get_connected_nodes(self) -> list['Node']:
         """
 Returns a list of the connected nodes found in self.connections.
