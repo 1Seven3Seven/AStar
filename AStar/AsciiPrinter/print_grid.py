@@ -1,7 +1,7 @@
 from AStar import Grid
 
 
-def print_grid(grid: Grid):
+def print_grid_node_parents(grid: Grid):
     """
 Prints the given grid.
 If a node has a parent then there will be an arrow pointing to it, otherwise just a square.

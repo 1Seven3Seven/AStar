@@ -16,8 +16,12 @@ If a node is in the path then there will be a connection to the next node, other
                 print('█', end='')
                 continue
 
-            if grid[x, y] is path.start or grid[x, y] is path.end:
-                print('■', end='')
+            if grid[x, y] is path.start:
+                print("S", end='')
+                continue
+
+            if grid[x, y] is path.end:
+                print('E', end='')
                 continue
 
             me = grid[x, y]
