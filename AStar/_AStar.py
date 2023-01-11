@@ -129,7 +129,7 @@ Performs a pass of the algorithm.
         node: Node = potential_nodes[0]
 
         # Check if it is the end node
-        if node == self.end:
+        if node is self.end:
             self.end_reached = True
             self.passes_performed += 1
             return
