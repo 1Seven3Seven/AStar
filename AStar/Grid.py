@@ -39,3 +39,12 @@ Does not work with slices.
             raise IndexError(f"Provided y coordinate '{y}' is not within the bounds [0, {self.y_size})")
 
         return self.grid[y][x]
+
+    def reset(self):
+        """
+Resets all nodes in the grid.
+        """
+
+        for y in range(self.y_size):
+            for x in range(self.x_size):
+                self.grid[y][x].reset()
