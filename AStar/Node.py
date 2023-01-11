@@ -1,6 +1,8 @@
-from __future__ import annotations
+from typing import TYPE_CHECKING
 
-from Connection import Connection
+
+if TYPE_CHECKING:
+    from .Connection import Connection
 
 
 class Node:
@@ -11,7 +13,7 @@ class Node:
         self.h_host: int = 0
 
         # The connections to other nodes
-        self.connections: list[Connection] = []
+        self.connections: list['Connection'] = []
 
         # The node which points to this one
         self.parent: Node | None = None
