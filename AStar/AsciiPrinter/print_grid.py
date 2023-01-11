@@ -11,7 +11,7 @@ If a node has a parent then there will be an arrow pointing to it, otherwise jus
     for y in range(grid.y_size):
         for x in range(grid.x_size):
             if grid[x, y].parent is None:
-                print('■', end='')
+                print('█', end='')
                 continue
 
             child = grid[x, y]
