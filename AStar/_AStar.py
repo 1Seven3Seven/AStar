@@ -1,4 +1,4 @@
-from AStar import Node
+from AStar import Node, Path
 
 
 class AStar:
@@ -149,4 +149,8 @@ If there is no nodes inside the open list then an error is raised.
             self._pass()
 
         # If we get here then the end has been reached without an error being raised, create the path.
-        # Follow the path of parents from the end node to the start node
+        path = Path(self.start, self.end)
+        path.generate_path()
+
+        # Return the path
+        return path
