@@ -56,7 +56,7 @@ Also calls reset.
     def set_end(self, node: Node):
         """
 Sets the new ending node.
-Also calls reset
+Also calls reset.
         :param node: The new ending node.
         """
 
