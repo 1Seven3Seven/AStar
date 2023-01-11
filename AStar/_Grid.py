@@ -1,5 +1,5 @@
-from .Connection import Connection
-from .Node import Node
+from ._Connection import Connection
+from ._Node import Node
 
 
 class Grid:

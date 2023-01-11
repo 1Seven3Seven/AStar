@@ -2,7 +2,7 @@ from typing import TYPE_CHECKING
 
 
 if TYPE_CHECKING:
-    from .Connection import Connection
+    from ._Connection import Connection
 
 
 class Node:

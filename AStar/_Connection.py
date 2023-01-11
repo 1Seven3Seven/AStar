@@ -1,4 +1,4 @@
-from .Node import Node
+from ._Node import Node
 
 
 class Connection:

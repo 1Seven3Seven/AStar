@@ -1,5 +1,5 @@
 import AStar.Errors
-from .AStar import AStar
-from .Connection import Connection
-from .Grid import Grid
-from .Node import Node
+from ._Node import Node
+from ._Connection import Connection
+from ._Grid import Grid
+from ._AStar import AStar
