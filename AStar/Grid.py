@@ -1,5 +1,5 @@
-from Connection import Connection
-from Node import Node
+from .Connection import Connection
+from .Node import Node
 
 
 class Grid:
@@ -24,3 +24,22 @@ class Grid:
                 new_connection = Connection(self.grid[y][x], self.grid[y + 1][x], 1)
                 self.grid[y][x].connections.append(new_connection)
                 self.grid[y + 1][x].connections.append(new_connection)
+
+    def __getitem__(self, coords: tuple[int, int]) -> Node:
+        """
+Returns the node at the given coordinates.
+Raises an IndexError of the coords are out of bounds.
+Does not work with slices.
+        :param coords: The coordinates of the node to lookup.
+        :return: The node at the coordinates.
+        """
+
+        x, y = coords
+
+        # Check for within bounds
+        if x < 0 or x >= self.x_size:
+            raise IndexError(f"Provided x coordinate '{x}' is not within the bounds [0, {self.x_size})")
+        if y < 0 or y >= self.y_size:
+            raise IndexError(f"Provided y coordinate '{y}' is not within the bounds [0, {self.y_size})")
+
+        return self.grid[y][x]
