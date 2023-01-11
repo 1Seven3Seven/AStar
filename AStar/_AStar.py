@@ -137,7 +137,7 @@ If there is no nodes inside the open list then an error is raised.
         # Sanity checks
         assert self.start is not None, "Start node must be set"
         assert self.end is not None, "End node must be set"
-        assert self.open, "Open list must have the start node, done when initialised or set_start is called"
+        assert self.open, "Open list must only contain the start node"
         assert len(self.open) == 1, "Open list must only contain the start node"
         assert self.open[0] is self.start, "Open list must only contain the start node"
         assert not self.closed, "Closed list must be empty"
