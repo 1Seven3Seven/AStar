@@ -11,7 +11,6 @@ If a node is in the path then there will be a connection to the next node, other
     """
 
     for y in range(grid.y_size):
-        print(y, end='')
         for x in range(grid.x_size):
             if grid[x, y] not in path.path:
                 print('█', end='')
