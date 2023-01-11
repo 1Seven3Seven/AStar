@@ -9,7 +9,7 @@ class Grid:
         self.y_size: int = y_size
 
         # Populate the grid
-        self.grid: list[list[Node]] = [[Node() for _ in range(x_size)] for _ in range(y_size)]
+        self.grid: list[list[Node]] = [[Node(x, y) for x in range(x_size)] for y in range(y_size)]
 
         # Add horizontal connections
         for y in range(y_size):
