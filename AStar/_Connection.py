@@ -3,10 +3,23 @@ from ._Node import Node
 
 class Connection:
     def __init__(self, node1: Node, node2: Node, weight: int):
-        self.node1: Node = node1
-        self.node2: Node = node2
+        self.node1: Node | None = node1
+        self.node2: Node | None = node2
 
         self.weight: int = weight
+
+    def remove(self):
+        """
+Removes the connection
+        """
+
+        # Remove the connection from the nodes
+        self.node1.connections.remove(self)
+        self.node2.connections.remove(self)
+
+        # Remove the references to the nodes
+        self.node1 = None
+        self.node2 = None
 
     @staticmethod
     def create_connection_between(node1: Node, node2: Node, weight: int) -> None:
