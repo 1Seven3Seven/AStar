@@ -14,7 +14,7 @@ class Node:
         # Distance from the starting node
         self.g_cost: int | None = None
         # Distance from the end node (heuristic)
-        self.h_host: int | None = None
+        self.h_cost: int | None = None
 
         # The connections to other nodes
         self.connections: list['Connection'] = []
@@ -25,7 +25,7 @@ class Node:
     @property
     def f_cost(self):
         # G cost + H cost
-        return self.g_cost + self.h_host
+        return self.g_cost + self.h_cost
 
     def reset(self):
         """
@@ -33,7 +33,7 @@ Resets the node's G and H costs, connections and parent.
         """
 
         self.g_cost = None
-        self.h_host = None
+        self.h_cost = None
         self.connections = []
         self.parent = None
 
@@ -92,4 +92,4 @@ Returns a list of all nodes that have the lowest H cost in the given list.
         return  all_min_h_cost_nodes
 
     def __str__(self):
-        return f"Node - G: {self.g_cost}, H: {self.h_host}, F: {self.f_cost}"
+        return f"Node - G: {self.g_cost}, H: {self.h_cost}, F: {self.f_cost}"

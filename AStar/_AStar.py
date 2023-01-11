@@ -69,7 +69,7 @@ Generates the G and H costs for the starting node.
         y_diff = abs(self.start.y_position - self.end.y_position)
         h_cost = x_diff + y_diff
 
-        self.start.h_host = h_cost
+        self.start.h_cost = h_cost
         self.start.g_cost = 0
 
 
