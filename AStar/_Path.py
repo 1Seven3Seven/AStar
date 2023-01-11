@@ -13,6 +13,15 @@ Contains a path between two nodes
         # Contains the path of nodes in order from the start to the end
         self.path: list[Node] = []
 
+    def __getitem__(self, index):
+        """
+Returns the node at the index for the path.
+        :param index: Index of the node to lookup.
+        :return: The node at the index.
+        """
+
+        return self.path[index]
+
     def generate_path(self):
         """
 Generates the path between the start and end nodes given during initialization.
