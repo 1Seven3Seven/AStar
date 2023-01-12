@@ -1,4 +1,5 @@
 from AStar import Node, Path
+from AStar.Errors import PathNotFound
 
 
 class AStar:
@@ -116,7 +117,12 @@ Processes the given node by:
     def _pass(self):
         """
 Performs a pass of the algorithm.
+If there is no nodes inside the open list then an error is raised.
         """
+
+        # Check for open nodes
+        if not self.open:
+            raise PathNotFound
 
         # Get all nodes with the minimum F cost
         potential_nodes = Node.get_all_lowest_f_cost(self.open)
