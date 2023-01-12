@@ -8,10 +8,17 @@ If a node has a parent then there will be an arrow pointing to it, otherwise jus
     :param grid: The grid to print.
     """
 
+    print('┌' + '─' * grid.x_size + '┐') # Boarder
     for y in range(grid.y_size):
+        print('│', end='')  # Boarder
         for x in range(grid.x_size):
+
+            # If no parent
             if grid[x, y].parent is None:
-                print('█', end='')
+                if grid[x, y].connections:
+                    print(' ', end='')
+                else:
+                    print('█', end='')
                 continue
 
             child = grid[x, y]
@@ -28,4 +35,6 @@ If a node has a parent then there will be an arrow pointing to it, otherwise jus
 
             print(char, end='')
 
-        print()  # Newline
+        print('│')  # Newline and Boarder
+
+    print('└' + '─' * grid.x_size + '┘') # Boarder

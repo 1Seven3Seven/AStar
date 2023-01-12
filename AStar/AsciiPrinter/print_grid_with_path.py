@@ -10,20 +10,30 @@ If a node is in the path then there will be a connection to the next node, other
     :param path: The path to print with the grid.
     """
 
+    print('┌' + '─' * grid.x_size + '┐') # Boarder
     for y in range(grid.y_size):
+        print('│', end='')  # Boarder
         for x in range(grid.x_size):
+
+            # Not part of the path
             if grid[x, y] not in path.path:
-                print('█', end='')
+                if grid[x, y].connections:
+                    print(' ', end='')
+                else:
+                    print('█', end='')
                 continue
 
+            # Start
             if grid[x, y] is path.start:
                 print("S", end='')
                 continue
 
+            # End
             if grid[x, y] is path.end:
                 print('E', end='')
                 continue
 
+            # Part of the path
             me = grid[x, y]
             my_index = path.path.index(me)
 
@@ -52,4 +62,6 @@ If a node is in the path then there will be a connection to the next node, other
 
             print(path_lookup[lookup], end='')
 
-        print()  # Newline
+        print('│')  # Newline and Boarder
+
+    print('└' + '─' * grid.x_size + '┘') # Boarder
