@@ -42,7 +42,7 @@ Resets the node's G and H costs, connections and parent.
 Calls remove on all connections.
         """
 
-        for connection in self.connections:
+        for connection in self.connections[:]:  # Allows deletion whilst iterating
             connection.remove()
 
     def get_connected_nodes(self) -> list['Node']:
