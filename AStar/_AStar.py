@@ -93,6 +93,8 @@ Processes the given node by:
         if processing_node not in self.closed:
             if processing_node not in self.open:
                 self.open.append(processing_node)
+        else:
+            return
 
         # Create its G costs
         # Currently just uses the sum of the x and y displacements
@@ -102,11 +104,11 @@ Processes the given node by:
 
         # If the g cost is smaller than the current g cost
         if (processing_node.g_cost is None) or (potential_g_cost < processing_node.g_cost):
-            # Set its parent to me
-            processing_node.parent = current_node
-
             # Give it its new G cost
             processing_node.g_cost = potential_g_cost
+
+            # Set its parent to me
+            processing_node.parent = current_node
 
             # Generate and give it is new H cost
             x_diff = abs(self.end.x_position - processing_node.x_position)
@@ -134,15 +136,15 @@ If there is no nodes inside the open list then an error is raised.
         # Get the fist index of the min H cost nodes
         node: Node = potential_nodes[0]
 
+        # Move the node from open to closed
+        self.open.remove(node)
+        self.closed.append(node)
+
         # Check if it is the end node
         if node is self.end:
             self.end_reached = True
             self.passes_performed += 1
             return
-
-        # Move the node from open to closed
-        self.open.remove(node)
-        self.closed.append(node)
 
         # Get all of its connections
         connected_nodes = node.get_connected_nodes()
