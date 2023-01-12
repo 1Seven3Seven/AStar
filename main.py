@@ -9,6 +9,12 @@ def main():
 
     a_star = AStar.AStar(start=grid[0, 0], end=grid[9, 9])
 
+    for x in range(grid.x_size):
+        if x == 5:
+            continue
+
+        grid[x, 5].remove_all_connections()
+
     path = a_star.find_path()
 
     print("\nNode Parents\n")
