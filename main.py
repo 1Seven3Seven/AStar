@@ -15,6 +15,10 @@ def main():
 
         grid[x, 5].remove_all_connections()
 
+    print("\nInitial State\n")
+    AsciiPrinter.print_grid_node_parents(grid)
+
+    print("\nGenerating Paths")
     path = a_star.find_path()
 
     print("\nNode Parents\n")
