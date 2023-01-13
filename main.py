@@ -1,5 +1,5 @@
 import AStar
-from AStar import AsciiPrinter
+from AStar import AsciiPrint
 
 
 def main():
@@ -14,16 +14,16 @@ def main():
         grid[x, 5].remove_all_connections()
 
     print("\nInitial State\n")
-    AsciiPrinter.print_grid_node_parents(grid)
+    AsciiPrint.Grid.node_parents(grid, start_node=a_star.start, end_node=a_star.end)
 
     print("\nGenerating Paths")
     path = a_star.find_path()
 
     print("\nNode Parents\n")
-    AsciiPrinter.print_grid_node_parents(grid)
+    AsciiPrint.Grid.node_parents(grid, start_node=a_star.start, end_node=a_star.end)
 
     print("\nPath Generated\n")
-    AsciiPrinter.print_grid_with_path(grid, path)
+    AsciiPrint.Grid.with_path(grid, path)
 
     print()  # Spacing
     print(f"Passes performed {a_star.passes_performed}")
