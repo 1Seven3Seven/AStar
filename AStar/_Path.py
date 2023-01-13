@@ -3,8 +3,10 @@ from AStar import Node
 
 class Path:
     """
-Contains a path between two nodes
-    """
+Contains a path between two nodes.
+The start and end nodes are provided upon initialisation.
+The path is generated when generate_path is called.
+"""
 
     def __init__(self, start: Node, end: Node):
         self.start: Node = start
@@ -30,6 +32,9 @@ Assumes:
     There is a valid path.
     Each node in the valid path has a parent (set by the AStar class).
         """
+
+        # Reset the path
+        self.path = []
 
         # Add the end
         self.path.append(self.end)

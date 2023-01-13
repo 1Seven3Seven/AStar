@@ -1,5 +1,6 @@
 from typing import TYPE_CHECKING
 
+from AStar.Errors import ConnectionNotFound
 
 if TYPE_CHECKING:
     from ._Connection import Connection
@@ -61,6 +62,19 @@ Returns a list of the connected nodes found in self.connections.
 
         return connected_nodes
 
+    def find_connection_with(self, other_node: 'Node') -> 'Connection':
+        """
+Looks for a connection between this node and the given node and returns one if found.
+Raises an error if no connection is found.
+        :param other_node: The node to look for a connection with.
+        :return: The connection between this node and the given node.
+        """
+        for connection in self.connections:
+            if connection.node1 is other_node or connection.node2 is other_node:
+                return connection
+
+        raise ConnectionNotFound(f"No connection found between {self} and {other_node}")
+
     @staticmethod
     def get_all_lowest_f_cost(list_of_nodes: list['Node']) -> list['Node']:
         """
@@ -78,7 +92,7 @@ Returns a list of all nodes that have the lowest F cost in the given list.
         ]
 
         # Return them
-        return  all_min_f_cost_nodes
+        return all_min_f_cost_nodes
 
     @staticmethod
     def get_all_lowest_h_cost(list_of_nodes: list['Node']) -> list['Node']:
@@ -97,7 +111,7 @@ Returns a list of all nodes that have the lowest H cost in the given list.
         ]
 
         # Return them
-        return  all_min_h_cost_nodes
+        return all_min_h_cost_nodes
 
     def __str__(self):
         return f"Node - G: {self.g_cost}, H: {self.h_cost}, F: {self.f_cost}"

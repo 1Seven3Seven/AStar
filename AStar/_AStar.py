@@ -26,14 +26,15 @@ class AStar:
 
     def reset(self):
         """
-Resets the algorithm.
+Resets the algorithm and allows for find_path to be run again.
+Specifically:
+    The open and closed lists.
+    The number of passes performed.
+    Whether the end node has been reached.
         """
 
         self.open = []
         self.closed = []
-
-        self.start = None
-        self.end = None
 
         self.passes_performed = 0
 
@@ -78,8 +79,7 @@ Generates the G and H costs for the starting node.
         self.start.h_cost = h_cost
         self.start.g_cost = 0
 
-
-    def _process_node(self, current_node, processing_node: Node):
+    def _process_node(self, current_node: Node, processing_node: Node):
         """
 Processes the given node by:
     Adding it to the list of open nodes if it is not already in the open or closed lists.
@@ -96,11 +96,12 @@ Processes the given node by:
         else:
             return
 
-        # Create its G costs
+        # Find the connection between the current node and the node being processed
+        connection = current_node.find_connection_with(processing_node)
+
+        # Create its G cost
         # Currently just uses the sum of the x and y displacements
-        x_diff = abs(self.start.x_position - processing_node.x_position)
-        y_diff = abs(self.start.y_position - processing_node.y_position)
-        potential_g_cost = x_diff + y_diff
+        potential_g_cost = current_node.g_cost + connection.weight
 
         # If the g cost is smaller than the current g cost
         if (processing_node.g_cost is None) or (potential_g_cost < processing_node.g_cost):
@@ -180,7 +181,7 @@ If there is no nodes inside the open list then an error is raised.
         while not self.end_reached:
             self._pass()
 
-        # If we get here then the end has been reached without an error being raised, create the path.
+        # If we get here then the end has been reached without an error being raised, create the path
         path = Path(self.start, self.end)
         path.generate_path()
 
