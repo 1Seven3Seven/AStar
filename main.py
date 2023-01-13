@@ -1,8 +1,6 @@
 import AStar
 from AStar import AsciiPrinter
 
-# ToDo: Black some nodes out so they can't be used in the path.
-
 
 def main():
     grid = AStar.Grid(10, 10)
