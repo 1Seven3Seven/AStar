@@ -8,6 +8,11 @@ if TYPE_CHECKING:
 
 class Node:
     def __init__(self, x_position: int, y_position: int):
+        """
+        :param x_position: Used when generating the H cost of the node.
+        :param y_position: Used when generating the H cost of the node.
+        """
+
         # Position
         self.x_position = x_position
         self.y_position = y_position
