@@ -28,16 +28,6 @@ class Node:
         # G cost + H cost
         return self.g_cost + self.h_cost
 
-    def reset(self):
-        """
-Resets the node's G and H costs, connections and parent.
-        """
-
-        self.g_cost = None
-        self.h_cost = None
-        self.connections = []
-        self.parent = None
-
     def remove_all_connections(self):
         """
 Calls remove on all connections.
@@ -45,6 +35,16 @@ Calls remove on all connections.
 
         for connection in self.connections[:]:  # Allows deletion whilst iterating
             connection.remove()
+
+    def reset(self):
+        """
+Resets the node's G and H costs, connections and parent.
+        """
+
+        self.g_cost = None
+        self.h_cost = None
+        self.remove_all_connections()
+        self.parent = None
 
     def get_connected_nodes(self) -> list['Node']:
         """
