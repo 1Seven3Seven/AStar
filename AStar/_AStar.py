@@ -1,9 +1,28 @@
+from typing import Callable
+
 from AStar import Node, Path
 from AStar.Errors import PathNotFound
 
 
+def _default_heuristic(end_node: Node, processing_node: Node) -> int:
+    """
+The default heuristic used when no heuristic is provided.
+Just the sum of the x and y displacements
+    :param end_node: The node the algorithm wants to meet.
+    :param processing_node: The current node being processed.
+    :return:
+    """
+
+    x_diff = abs(end_node.x_position - processing_node.x_position)
+    y_diff = abs(end_node.y_position - processing_node.y_position)
+    return x_diff + y_diff
+
+
 class AStar:
-    def __init__(self, start: Node | None = None, end: Node | None = None):
+    def __init__(self,
+                 start: Node | None = None,
+                 end: Node | None = None,
+                 heuristic: Callable[[Node, Node], int] | None = None):
         # All the nodes that can be evaluated next
         self.open: list[Node] = []
         # All the nodes that have been evaluated
@@ -23,6 +42,9 @@ class AStar:
         # Add the start to the open list
         if self.start is not None:
             self.open.append(self.start)
+
+        # The heuristic for the H cost
+        self.heuristic: Callable[[Node, Node], int] = _default_heuristic if heuristic is None else heuristic
 
     def reset(self):
         """
@@ -72,11 +94,7 @@ Called before _process_node should be called.
 Generates the G and H costs for the starting node.
         """
 
-        x_diff = abs(self.start.x_position - self.end.x_position)
-        y_diff = abs(self.start.y_position - self.end.y_position)
-        h_cost = x_diff + y_diff
-
-        self.start.h_cost = h_cost
+        self.start.h_cost = self.heuristic(self.end, self.start)
         self.start.g_cost = 0
 
     def _process_node(self, current_node: Node, processing_node: Node):
@@ -100,7 +118,6 @@ Processes the given node by:
         connection = current_node.find_connection_with(processing_node)
 
         # Create its G cost
-        # Currently just uses the sum of the x and y displacements
         potential_g_cost = current_node.g_cost + connection.weight
 
         # If the g cost is smaller than the current g cost
@@ -112,10 +129,7 @@ Processes the given node by:
             processing_node.parent = current_node
 
             # Generate and give it is new H cost
-            x_diff = abs(self.end.x_position - processing_node.x_position)
-            y_diff = abs(self.end.y_position - processing_node.y_position)
-            new_h_cost = x_diff + y_diff
-            processing_node.h_cost = new_h_cost
+            processing_node.h_cost = self.heuristic(self.end, processing_node)
 
     def _pass(self):
         """
