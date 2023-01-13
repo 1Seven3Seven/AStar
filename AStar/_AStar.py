@@ -169,13 +169,12 @@ If there is no nodes inside the open list then an error is raised.
             self._process_node(node, connected_node)
 
         self.passes_performed += 1
-        return
 
-    def find_path(self):
+    def find_path(self) -> Path:
         """
 Finds a path from the start node to the end node.
 If there is no nodes inside the open list then an error is raised.
-        :return: Nothing in so far.
+        :return: The generated path.
         """
 
         # Sanity checks
