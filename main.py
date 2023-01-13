@@ -28,6 +28,7 @@ def main():
 
     print()  # Spacing
     print(f"Passes performed {a_star.passes_performed}")
+    print(f"Path length {len(path)}")
     print()  # Spacing
 
 
