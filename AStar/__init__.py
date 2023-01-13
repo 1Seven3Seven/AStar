@@ -5,11 +5,11 @@ import AStar.Errors
 from ._Node import Node
 from ._Connection import Connection
 
-# Ways of generating sets of nodes and connections
-from ._Grid import Grid
-
 # Used by the algorithm so this needs to come before it
 from ._Path import Path
+
+# Ways of generating nodes
+import AStar.NodeGenerator
 
 # The algorithm
 from ._AStar import AStar

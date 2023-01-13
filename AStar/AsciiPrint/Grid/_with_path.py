@@ -1,6 +1,7 @@
-from AStar import Grid, Path, Node
+from AStar import Path, Node
 from AStar.AsciiPrint.Grid import grid_path_lookup
 from AStar.AsciiPrint.Grid._boarder_chars import *
+from AStar.NodeGenerator import Grid
 
 
 def with_path(grid: Grid, path: Path):

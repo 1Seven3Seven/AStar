@@ -1,11 +1,12 @@
-import AStar
+from AStar import AStar
 from AStar import AsciiPrint
+from AStar import NodeGenerator
 
 
 def main():
-    grid = AStar.Grid(10, 10)
+    grid = NodeGenerator.Grid(10, 10)
 
-    a_star = AStar.AStar(start=grid[0, 0], end=grid[9, 9])
+    a_star = AStar(start=grid[0, 0], end=grid[9, 9])
 
     for x in range(grid.x_size):
         if x == 5:

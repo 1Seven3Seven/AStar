@@ -1,5 +1,6 @@
-from AStar import Grid, Node
+from AStar import Node
 from AStar.AsciiPrint.Grid._boarder_chars import *
+from AStar.NodeGenerator import Grid
 
 
 def node_parents(grid: Grid, start_node: Node | None = None, end_node: Node | None = None):
