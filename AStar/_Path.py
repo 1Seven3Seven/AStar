@@ -24,6 +24,12 @@ Returns the node at the index for the path.
 
         return self.path[index]
 
+    def __len__(self):
+        """
+Returns the length of the path list.
+        """
+        return len(self.path)
+
     def generate_path(self):
         """
 Generates the path between the start and end nodes given during initialization.
