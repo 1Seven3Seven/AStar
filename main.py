@@ -12,7 +12,7 @@ def main():
         if x == 5:
             continue
 
-        grid[x, 5].remove_all_connections()
+        grid[x, 5].traversable = False
 
     print("\nInitial State\n")
     AsciiPrint.Grid.node_parents(grid, start_node=a_star.start, end_node=a_star.end)

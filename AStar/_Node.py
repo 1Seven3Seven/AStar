@@ -28,6 +28,9 @@ class Node:
         # The node which points to this one
         self.parent: 'Node' | None = None
 
+        # If the node can be moved to when finding a path
+        self.traversable = True
+
     @property
     def f_cost(self):
         # G cost + H cost

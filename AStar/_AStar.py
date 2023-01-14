@@ -107,6 +107,10 @@ Processes the given node by:
         :param processing_node: Node to be processed
         """
 
+        # If the node isn't traversable
+        if not processing_node.traversable:
+            return
+
         # If not in closed and not in open then add to open
         if processing_node not in self.closed:
             if processing_node not in self.open:
@@ -149,24 +153,24 @@ If there is no nodes inside the open list then an error is raised.
         potential_nodes = Node.get_all_lowest_h_cost(potential_nodes)
 
         # Get the fist index of the min H cost nodes
-        node: Node = potential_nodes[0]
+        processing_node: Node = potential_nodes[0]
 
         # Move the node from open to closed
-        self.open.remove(node)
-        self.closed.append(node)
+        self.open.remove(processing_node)
+        self.closed.append(processing_node)
 
         # Check if it is the end node
-        if node is self.end:
+        if processing_node is self.end:
             self.end_reached = True
             self.passes_performed += 1
             return
 
         # Get all of its connections
-        connected_nodes = node.get_connected_nodes()
+        connected_nodes = processing_node.get_connected_nodes()
 
         # Process all the connected nodes
         for connected_node in connected_nodes:
-            self._process_node(node, connected_node)
+            self._process_node(processing_node, connected_node)
 
         self.passes_performed += 1
 
@@ -178,14 +182,16 @@ If there is no nodes inside the open list then an error is raised.
         """
 
         # Sanity checks
-        assert self.start is not None, "Start node must be set"
-        assert self.end is not None, "End node must be set"
-        assert self.open, "Open list must only contain the start node"
-        assert len(self.open) == 1, "Open list must only contain the start node"
-        assert self.open[0] is self.start, "Open list must only contain the start node"
-        assert not self.closed, "Closed list must be empty"
-        assert not self.end_reached, "End condition must not start as True"
-        assert self.start is not self.end, "Start must not be the end"
+        assert self.start is not None,      "Start node must be set"
+        assert self.start.traversable,  "Start node must be traversable"
+        assert self.end is not None,        "End node must be set"
+        assert self.end.traversable,    "End node must be traversable"
+        assert self.open,                   "Open list must only contain the start node"
+        assert len(self.open) == 1,         "Open list must only contain the start node"
+        assert self.open[0] is self.start,  "Open list must only contain the start node"
+        assert not self.closed,             "Closed list must be empty"
+        assert not self.end_reached,        "End condition must not start as True"
+        assert self.start is not self.end,  "Start must not be the end"
 
         # Generate the G and H costs of the starting node
         self._process_start_node()
