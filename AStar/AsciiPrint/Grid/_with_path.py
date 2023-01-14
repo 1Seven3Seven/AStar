@@ -21,7 +21,7 @@ If a node is in the path then there will be a connection to the next node, other
 
             # Not part of the path
             if grid[x, y] not in path.path:
-                if grid[x, y].connections:
+                if grid[x, y].traversable:
                     print(' ', end='')
                 else:
                     print('█', end='')

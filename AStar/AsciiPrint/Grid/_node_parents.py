@@ -29,7 +29,7 @@ If a node has a parent then there will be an arrow pointing to it, otherwise not
 
             # If no parent
             if grid[x, y].parent is None:
-                if grid[x, y].connections:
+                if grid[x, y].traversable:
                     print(' ', end='')
                 else:
                     print('█', end='')
