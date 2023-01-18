@@ -1,3 +1,7 @@
+"""
+My attempt at implementing the A* pathfinding algorithm.
+"""
+
 # Errors, huh
 import AStar.Errors
 
