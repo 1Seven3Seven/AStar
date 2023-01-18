@@ -39,6 +39,8 @@ If a node has a parent then there will be an arrow pointing to it, otherwise not
             child = grid[x, y]
             parent = child.parent
 
+            # ToDo: Handle case with diagonal parents
+            
             # Find the direction of the arrow to print
             if parent.x_position > child.x_position:  # To the right
                 char = '→'

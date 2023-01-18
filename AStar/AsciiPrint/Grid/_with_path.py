@@ -41,6 +41,8 @@ If a node is in the path then there will be a connection to the next node, other
             me = grid[x, y]
             my_index = path.path.index(me)
 
+            # ToDo: Handle case with diagonal parents
+
             previous: Node | None = None
             following: Node | None = None
 
