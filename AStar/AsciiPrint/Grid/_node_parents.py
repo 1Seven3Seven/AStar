@@ -12,6 +12,9 @@ If a node has a parent then there will be an arrow pointing to it, otherwise not
     :param end_node: If provided then the end node is displayed as an 'E'.
     """
 
+    # Checking for diagonal boarders
+    assert not grid.diagonal_connections, "ASCII grid printer not compatiable with diagonal connections"
+
     print(TOP_LEFT + HORIZONTAL * grid.x_size + TOP_RIGHT)  # Boarder
 
     for y in range(grid.y_size):
@@ -39,8 +42,6 @@ If a node has a parent then there will be an arrow pointing to it, otherwise not
             child = grid[x, y]
             parent = child.parent
 
-            # ToDo: Handle case with diagonal parents
-            
             # Find the direction of the arrow to print
             if parent.x_position > child.x_position:  # To the right
                 char = '→'

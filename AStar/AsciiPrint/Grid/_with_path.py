@@ -12,6 +12,9 @@ If a node is in the path then there will be a connection to the next node, other
     :param path: The path to print with the grid.
     """
 
+    # Checking for diagonal boarders
+    assert not grid.diagonal_connections, "ASCII grid printer not compatiable with diagonal connections"
+
     print(TOP_LEFT + HORIZONTAL * grid.x_size + TOP_RIGHT)  # Boarder
 
     for y in range(grid.y_size):
@@ -40,8 +43,6 @@ If a node is in the path then there will be a connection to the next node, other
             # Part of the path
             me = grid[x, y]
             my_index = path.path.index(me)
-
-            # ToDo: Handle case with diagonal parents
 
             previous: Node | None = None
             following: Node | None = None

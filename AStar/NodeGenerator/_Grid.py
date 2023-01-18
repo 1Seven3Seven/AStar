@@ -21,6 +21,10 @@ class Grid:
         # Populate the grid
         self.grid: list[list[Node]] = [[Node(x, y) for x in range(x_size)] for y in range(y_size)]
 
+        # Types of connections
+        self.direct_connections = direct_connections
+        self.diagonal_connections = diagonal_connections
+
         # Add direct connections
         if direct_connections:
             # Horizontal
