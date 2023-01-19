@@ -27,6 +27,9 @@ class Grid:
         # Populate the grid
         self.grid: list[list[node_class]] = [[node_class(x, y) for x in range(x_size)] for y in range(y_size)]
 
+        # The class of the node
+        self.node_class = node_class
+
         # Types of connections
         self.direct_connections = direct_connections
         self.diagonal_connections = diagonal_connections
@@ -67,7 +70,7 @@ class Grid:
                             Connection.create_connection_between(self.grid[a][b], self.grid[y][x], 1)
         # endregion
 
-    def __getitem__(self, coords: tuple[int, int]) -> Type[Node]:
+    def __getitem__(self, coords: tuple[int, int]) -> self.node_class:
         """
 Returns the node at the given coordinates.
 Raises an IndexError of the coords are out of bounds.
