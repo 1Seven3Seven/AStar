@@ -1,17 +1,24 @@
+from typing import Type
+
 from AStar._Connection import Connection
 from AStar._Node import Node
 
 
 class Grid:
-    def __init__(self,
-                 x_size: int, y_size: int,
-                 direct_connections: bool = True,
-                 diagonal_connections: bool = False):
+    def __init__(
+            self,
+            x_size: int, y_size: int,
+            direct_connections: bool = True,
+            diagonal_connections: bool = False,
+            node_class: Type[Node] = Node
+    ):
         """
+        :type node_class:
         :param x_size: The width of the grid.
         :param y_size: The height of the grid.
         :param direct_connections: If the nodes should be connected to their direct neighbours, up, down, left, right.
         :param diagonal_connections: If the nodes should be connected to their diagonal neighbours.
+        :param node_class: The class to use instead of the normal Node, should be a child of Node with the exact same constructor arguments.
         """
 
         # Store size
@@ -19,7 +26,7 @@ class Grid:
         self.y_size: int = y_size
 
         # Populate the grid
-        self.grid: list[list[Node]] = [[Node(x, y) for x in range(x_size)] for y in range(y_size)]
+        self.grid: list[list[node_class]] = [[node_class(x, y) for x in range(x_size)] for y in range(y_size)]
 
         # Types of connections
         self.direct_connections = direct_connections
