@@ -13,12 +13,11 @@ class Grid:
             node_class: Type[Node] = Node
     ):
         """
-        :type node_class:
         :param x_size: The width of the grid.
         :param y_size: The height of the grid.
         :param direct_connections: If the nodes should be connected to their direct neighbours, up, down, left, right.
         :param diagonal_connections: If the nodes should be connected to their diagonal neighbours.
-        :param node_class: The class to use instead of the normal Node, should be a child of Node with the exact same constructor arguments.
+        :param node_class: The class to use instead of Node, should be a child of Node with the exact same constructor arguments.
         """
 
         # Store size
@@ -68,7 +67,7 @@ class Grid:
                                 self.grid[a][b], self.grid[y][x], 1
                             )
 
-    def __getitem__(self, coords: tuple[int, int]) -> Node:
+    def __getitem__(self, coords: tuple[int, int]) -> Type[Node]:
         """
 Returns the node at the given coordinates.
 Raises an IndexError of the coords are out of bounds.
