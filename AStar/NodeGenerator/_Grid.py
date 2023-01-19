@@ -31,7 +31,7 @@ class Grid:
         self.direct_connections = direct_connections
         self.diagonal_connections = diagonal_connections
 
-        # Add direct connections
+        # region - Add direct connections
         if direct_connections:
             # Horizontal
             for y in range(y_size):
@@ -41,8 +41,9 @@ class Grid:
             for y in range(y_size - 1):
                 for x in range(x_size):
                     Connection.create_connection_between(self.grid[y][x], self.grid[y + 1][x], 1)
+        # endregion
 
-        # Add the diagonal connections
+        # region - Add the diagonal connections
         if diagonal_connections:
             for a in range(y_size):
                 for b in range(x_size):
@@ -63,9 +64,8 @@ class Grid:
                                 continue
 
                             # Create the connection
-                            Connection.create_connection_between(
-                                self.grid[a][b], self.grid[y][x], 1
-                            )
+                            Connection.create_connection_between(self.grid[a][b], self.grid[y][x], 1)
+        # endregion
 
     def __getitem__(self, coords: tuple[int, int]) -> Type[Node]:
         """
